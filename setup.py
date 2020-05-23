@@ -1,5 +1,6 @@
 from distutils.core import setup
 
+
 setup(name='at28c256',
       version='1.0',
       description='AT28C256 Programmer',

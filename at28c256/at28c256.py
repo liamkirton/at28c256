@@ -9,8 +9,7 @@ class AT28C256(object):
         print('>>>>> AT28C256 Serial Connected ("', self.serial.readline().decode('ascii').strip(), '")', sep='')
 
     def read(self, address):
-        address %= 0x8000
-        self.serial.write(b'\x01' + struct.pack('<H', address))
+        self.serial.write(b'\x01' + struct.pack('<H', address & 0x7fff))
         return self.serial.read()
 
     def read_range(self, address, count):
@@ -20,7 +19,7 @@ class AT28C256(object):
         return v
 
     def write(self, address, value):
-        self.serial.write(b'\x02' + struct.pack('<HB', address, value))
+        self.serial.write(b'\x02' + struct.pack('<HB', address & 0x7fff, value & 0xff))
         return self.serial.read()
 
     def write_range(self, address, data):
