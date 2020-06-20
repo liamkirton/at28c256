@@ -4,8 +4,8 @@ import struct
 
 class AT28C256(object):
 
-    def __init__(self):
-        self.serial = serial.Serial('COM4', 115200)
+    def __init__(self, port='COM4'):
+        self.serial = serial.Serial(port, 115200)
         print('>>>>> AT28C256 Serial Connected ("', self.serial.readline().decode('ascii').strip(), '")', sep='')
 
     def read(self, address):
